@@ -11,3 +11,25 @@ Corrected the date for prev entry to the proper format. I connected to Adventure
 Provisioned a new VM (duplicate-machine) which was a copy of the old one. Installed all the necessary software on here, logged into Azure, downloaded the .bak file and mov3ed it to the correct folder in Program Files. Then I restored this on the new VM and spent a lot of time confused because I thought I needed to connect it to Azure or to some other account - the confusion was compounded by the fact that the Server was rendered as "duplicate-machi...".
 
 More trouble when I had to automate updates from the development environment to the Azure storage account - a lot of 400 and 403 errors. I think this was because the blob in the container was set to private. I also ticked a box in SSMS that said "ignore error messages." Tried restoring one of the backups sent after this change and it worked alright.
+
+21/01/2024
+Had been working on Milestone 5 but administrative error meant I had to restart the whole project.
+
+The SQL commands I have used are:
+- sp_help 'Person.Address' - [This lists the constraints which mention Person.Address because I want to drop the foreign keys in other tables]
+- ALTER TABLE Ai_Production.Person.BusinessEntityAddress
+DROP CONSTRAINT FK_BusinessEntityAddress_Address_AddressID
+ALTER TABLE Ai_Production.Sales.SalesOrderHeader
+DROP CONSTRAINT  FK_SalesOrderHeader_Address_BillToAddressID
+ALTER TABLE Ai_Production.Sales.SalesOrderHeader
+DROP CONSTRAINT  FK_SalesOrderHeader_Address_ShipToAddressID
+
+DROP TABLE Person.Address; - [This lets me drop the table Person.Address]
+
+UPDATE Production.ProductReview
+SET Comments = 'Hello World!'; - [This changes all the comments on the reviews]
+
+ALTER TABLE HumanResources.Employee
+DROP COLUMN JobTitle; - [This drops a column from the table]
+
+After running these queries, I restored the database from Azure.
