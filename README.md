@@ -13,11 +13,11 @@ Provisioned a new VM (duplicate-machine) which was a copy of the old one. Instal
 More trouble when I had to automate updates from the development environment to the Azure storage account - a lot of 400 and 403 errors. I think this was because the blob in the container was set to private. I also ticked a box in SSMS that said "ignore error messages." Tried restoring one of the backups sent after this change and it worked alright.
 
 21/01/2024
-Had been working on Milestone 5 but administrative error meant I had to restart the whole project.
+Had been working on Milestone 5 but administrative error meant I had to restart the whole project. Restart followed pretty much the same except in the lastcase there was no trouble when setting up automatic backups - I think this is because I set up the storage account properly
 
 The SQL commands I have used are:
 - sp_help 'Person.Address' - [This lists the constraints which mention Person.Address because I want to drop the foreign keys in other tables]
-- ALTER TABLE Ai_Production.Person.BusinessEntityAddress
+- ALTER TABLE Ai_Production.Person.BusinessEntityAddress.
 DROP CONSTRAINT FK_BusinessEntityAddress_Address_AddressID
 ALTER TABLE Ai_Production.Sales.SalesOrderHeader
 DROP CONSTRAINT  FK_SalesOrderHeader_Address_BillToAddressID
@@ -33,3 +33,7 @@ ALTER TABLE HumanResources.Employee
 DROP COLUMN JobTitle; - [This drops a column from the table]
 
 After running these queries, I restored the database from Azure.
+
+22/01/2024
+For the geo-replication I set up a replica of my original database server called "original-server" in Central India and setup both in the same failover group. I initiated a failover and my primary server switched, and then another failover, and they returned to their original positions.
+
