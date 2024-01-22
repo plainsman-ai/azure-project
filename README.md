@@ -37,3 +37,7 @@ After running these queries, I restored the database from Azure.
 22/01/2024
 For the geo-replication I set up a replica of my original database server called "original-server" in Central India and setup both in the same failover group. I initiated a failover and my primary server switched, and then another failover, and they returned to their original positions.
 
+Then for the Entra ID, I didn't set up any groups on my own, because I was already avaliable as an AiCore member. Then I navigated to my original virtual machine, disconnected from the server in the previous point, and reconnected using Microsoft Entra - I did not get a popup asking me to provide login details, because I had already logged in while setting up Azure Data Studio on that machine.
+
+Then I made a group on Entra Id and a user called db_reader111. I modified the connection in Azure Data Studio to allow this user to read the databases and it worked.
+
