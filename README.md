@@ -1,5 +1,16 @@
 # azure-project
 
+Setting Up - Provided with login details by AiCore to log in with their subscription.
+
+Setting Up Production Environment - Provisioned a Virtual Machine with RDP protocol on Port 3389, which allowed me to open the VM with an .exe file. Installed SQL Server and SSMS directly on VM. Downloaded the .bak file for AdventureWorks and restored it with SSMS (fig 1)
+
+Migrating to Azure SQL Database - Set up an Azure SQL Database. Established connection using Azure Data Studio (on VM) to the production environment with SQL login. Established connection to Azure SQL Database using Windows Authentication (this requires login via browser on VM). Installed SQL Server Schema Compare extension to migrate the schema from the production environment to the Azure SQL Database, which also made migrating easier. 
+
+
+
+
+
+
 05/01/2024
 Writing this from the Azure VM. Have installed SQL Server and SSMS. Have also restored AdventureWorks with SSMS.
 
