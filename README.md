@@ -2,32 +2,21 @@
 
 Setting Up - Provided with login details by AiCore to log in with their subscription.
 
-Setting Up Production Environment - Provisioned a Virtual Machine with RDP protocol on Port 3389, which allowed me to open the VM with an .exe file. Installed SQL Server and SSMS directly on VM. Downloaded the .bak file for AdventureWorks and restored it with SSMS (fig 1)
 
-Migrating to Azure SQL Database - Set up an Azure SQL Database. Established connection using Azure Data Studio (on VM) to the production environment with SQL login. Established connection to Azure SQL Database using Windows Authentication (this requires login via browser on VM). Installed SQL Server Schema Compare extension to migrate the schema from the production environment to the Azure SQL Database, which also made migrating easier. 
-
+Setting Up Production Environment - Provisioned a Virtual Machine with RDP protocol on Port 3389, which allowed me to open the VM with an .exe file. Installed SQL Server and SSMS directly on VM. Downloaded the .bak file for AdventureWorks and restored it with SSMS.
 
 
+Migrating to Azure SQL Database - Set up an Azure SQL Database. Established connection using Azure Data Studio (on VM) to the production environment with SQL login. Established connection to Azure SQL Database using Windows Authentication (this requires login via browser on VM). Installed SQL Server Schema Compare extension to migrate the schema from the production environment to the Azure SQL Database, which also made migrating easier. Then installed the Azure SQL Migration extension which let me migrate the whole database to the Azure SQL Database. I validated this by comparing the schema and sampling a few of the tables to see if they matched in the original and the migrated databases.
 
 
-
-05/01/2024
-Writing this from the Azure VM. Have installed SQL Server and SSMS. Have also restored AdventureWorks with SSMS.
+Data Backup and Restore - Generated a backup of the production database using SSMS. Configured a Blob Storage account on Azure and uploaded the .bak file there. Created a sandbox environment to replicate the other VM (including download of SSMS and login to Azure on the VM to access the storage account) and restored database from Blob Storage. Configured a weekly backup plan to Blob Storage account using SSMS and Azure access keys.
 
 
-07/01/2024
-Corrected the date for prev entry to the proper format. I connected to AdventureWorks using Windows Authentication on Azure Data Studio. I connected to the database on Azure by using details from the Azure portal. I downloaded the addons in Azure Data Studio and used them to migrate all the info from one database to the other - although I had a bit of trouble here trying to get the Database Migration Service to work, this was solved with the help of the team. Then I checked to see everything had been transferred well.
+Disaster Recovery Simulation - In my production environment I simulated data loss by corrupting the data with some SQL commands. They were as follows (with description of what the commands collectively do):
 
-15/01/2024
-Provisioned a new VM (duplicate-machine) which was a copy of the old one. Installed all the necessary software on here, logged into Azure, downloaded the .bak file and mov3ed it to the correct folder in Program Files. Then I restored this on the new VM and spent a lot of time confused because I thought I needed to connect it to Azure or to some other account - the confusion was compounded by the fact that the Server was rendered as "duplicate-machi...".
-
-More trouble when I had to automate updates from the development environment to the Azure storage account - a lot of 400 and 403 errors. I think this was because the blob in the container was set to private. I also ticked a box in SSMS that said "ignore error messages." Tried restoring one of the backups sent after this change and it worked alright.
-
-21/01/2024
-Had been working on Milestone 5 but administrative error meant I had to restart the whole project. Restart followed pretty much the same except in the lastcase there was no trouble when setting up automatic backups - I think this is because I set up the storage account properly
-
-The SQL commands I have used are:
+1. Drop a table
 - sp_help 'Person.Address' - [This lists the constraints which mention Person.Address because I want to drop the foreign keys in other tables]
+
 - ALTER TABLE Ai_Production.Person.BusinessEntityAddress.
 DROP CONSTRAINT FK_BusinessEntityAddress_Address_AddressID
 ALTER TABLE Ai_Production.Sales.SalesOrderHeader
@@ -37,13 +26,17 @@ DROP CONSTRAINT  FK_SalesOrderHeader_Address_ShipToAddressID
 
 DROP TABLE Person.Address; - [This lets me drop the table Person.Address]
 
+2. Alter a column
 UPDATE Production.ProductReview
 SET Comments = 'Hello World!'; - [This changes all the comments on the reviews]
 
+3. Drop a column from a table
 ALTER TABLE HumanResources.Employee
 DROP COLUMN JobTitle; - [This drops a column from the table]
 
-After running these queries, I restored the database from Azure.
+After running these commands, I downloaded the weekly backup I had made in the previous step and restored it to my production environment, thereby conducting a full disaster recovery simulation.
+
+Geo-Replication and Failover - 
 
 22/01/2024
 For the geo-replication I set up a replica of my original database server called "original-server" in Central India and setup both in the same failover group. I initiated a failover and my primary server switched, and then another failover, and they returned to their original positions.
