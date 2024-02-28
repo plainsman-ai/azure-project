@@ -19,8 +19,10 @@ Data Backup and Restore - Generated a backup of the production database using SS
 Disaster Recovery Simulation - In my production environment I simulated data loss by corrupting the data with some SQL commands. They were as follows (with description of what the commands collectively do):
 
 1. Drop a table
+
         [This lists the constraints which mention Person.Address because I want to drop the foreign keys in other tables]
-        sp_help 'Person.Address'  
+   
+        sp_help 'Person.Address';
 
         ALTER TABLE Ai_Production.Person.BusinessEntityAddress
         DROP CONSTRAINT FK_BusinessEntityAddress_Address_AddressID
@@ -35,13 +37,15 @@ Disaster Recovery Simulation - In my production environment I simulated data los
         DROP TABLE Person.Address;  
 
 
-3. Alter a column
+2. Alter a column
+
         [This changes all the comments on the reviews]
         UPDATE Production.ProductReview
         SET Comments = 'Hello World!';  
 
 
-4. Drop a column from a table
+3. Drop a column from a table
+
         [This drops a column from the table]
         ALTER TABLE HumanResources.Employee
         DROP COLUMN JobTitle;  
