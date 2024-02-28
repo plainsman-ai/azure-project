@@ -20,28 +20,31 @@ Disaster Recovery Simulation - In my production environment I simulated data los
 
 1. Drop a table
 
-sp_help 'Person.Address'  [This lists the constraints which mention Person.Address because I want to drop the foreign keys in other tables]
+    sp_help 'Person.Address'  [This lists the constraints which mention Person.Address because I want to drop the foreign keys in other tables]
 
-ALTER TABLE Ai_Production.Person.BusinessEntityAddress
-DROP CONSTRAINT FK_BusinessEntityAddress_Address_AddressID
+    ALTER TABLE Ai_Production.Person.BusinessEntityAddress
+    DROP CONSTRAINT FK_BusinessEntityAddress_Address_AddressID
 
-ALTER TABLE Ai_Production.Sales.SalesOrderHeader
-DROP CONSTRAINT  FK_SalesOrderHeader_Address_BillToAddressID
+    ALTER TABLE Ai_Production.Sales.SalesOrderHeader
+    DROP CONSTRAINT  FK_SalesOrderHeader_Address_BillToAddressID
 
-ALTER TABLE Ai_Production.Sales.SalesOrderHeader
-DROP CONSTRAINT  FK_SalesOrderHeader_Address_ShipToAddressID
+    ALTER TABLE Ai_Production.Sales.SalesOrderHeader
+    DROP CONSTRAINT  FK_SalesOrderHeader_Address_ShipToAddressID
 
-DROP TABLE Person.Address;  [This lets me drop the table Person.Address]
+    DROP TABLE Person.Address;  [This lets me drop the table Person.Address]
+
 
 2. Alter a column
 
-UPDATE Production.ProductReview
-SET Comments = 'Hello World!';  [This changes all the comments on the reviews]
+    UPDATE Production.ProductReview
+    SET Comments = 'Hello World!';  [This changes all the comments on the reviews]
+
 
 3. Drop a column from a table
 
-ALTER TABLE HumanResources.Employee
-DROP COLUMN JobTitle;  [This drops a column from the table]
+    ALTER TABLE HumanResources.Employee
+    DROP COLUMN JobTitle;  [This drops a column from the table]
+
 
 After running these commands, I downloaded the weekly backup I had made in the previous step and restored it to my production environment, thereby conducting a full disaster recovery simulation.
 
