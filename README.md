@@ -1,4 +1,4 @@
-# azure-project
+# Azure Database Migration Project
 
 Setting Up - Provided with login details by AiCore to log in with their subscription.
 
@@ -55,16 +55,10 @@ After running these commands, I downloaded the weekly backup I had made in the p
 
 ----------------------------
 
-Geo-Replication and Failover - 
+Geo-Replication and Failover - Created a geo-replica of my original database server in Central India and setup both in the same failover group. Initiated a failover to Central Indian server and a tailback to original (UK South 1).
 
+----------------------------
 
+Entra ID Integration - Made a group on Entra ID and an Admin for user management and access control. Then created a new user account called db_reader111 and assigned it the db_datareader role, which allowed it to read databases when I logged in.
 
-
-
-22/01/2024
-For the geo-replication I set up a replica of my original database server called "original-server" in Central India and setup both in the same failover group. I initiated a failover and my primary server switched, and then another failover, and they returned to their original positions.
-
-Then for the Entra ID, I didn't set up any groups on my own, because I was already avaliable as an AiCore member. Then I navigated to my original virtual machine, disconnected from the server in the previous point, and reconnected using Microsoft Entra - I did not get a popup asking me to provide login details, because I had already logged in while setting up Azure Data Studio on that machine.
-
-Then I made a group on Entra Id and a user called db_reader111. I modified the connection in Azure Data Studio to allow this user to read the databases and it worked.
 
