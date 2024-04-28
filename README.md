@@ -3,28 +3,30 @@
 A diary of my work on the Azure project for AiCore is provided below.
 
 
-
------------------------
 -----------------------
 
-
-Setting Up - Provided with login details by AiCore to log in with their subscription.
+## Setting Up
+Provided with login details by AiCore to log in with their subscription.
 
 ------------------------
 
-Setting Up Production Environment - Provisioned a Virtual Machine with RDP protocol on Port 3389, which allowed me to open the VM with an .exe file. Installed SQL Server and SSMS directly on VM. Downloaded the .bak file for AdventureWorks and restored it with SSMS.
+## Setting Up Production Environment
+Provisioned a Virtual Machine with RDP protocol on Port 3389, which allowed me to open the VM with an .exe file. Installed SQL Server and SSMS directly on VM. Downloaded the .bak file for AdventureWorks and restored it with SSMS.
 
 -------------------------
 
-Migrating to Azure SQL Database - Set up an Azure SQL Database. Established connection using Azure Data Studio (on VM) to the production environment with SQL login. Established connection to Azure SQL Database using Windows Authentication (this requires login via browser on VM). Installed SQL Server Schema Compare extension to migrate the schema from the production environment to the Azure SQL Database, which also made migrating easier. Then installed the Azure SQL Migration extension which let me migrate the whole database to the Azure SQL Database. I validated this by comparing the schema and sampling a few of the tables to see if they matched in the original and the migrated databases.
+## Migrating to Azure SQL Database
+Set up an Azure SQL Database. Established connection using Azure Data Studio (on VM) to the production environment with SQL login. Established connection to Azure SQL Database using Windows Authentication (this requires login via browser on VM). Installed SQL Server Schema Compare extension to migrate the schema from the production environment to the Azure SQL Database, which also made migrating easier. Then installed the Azure SQL Migration extension which let me migrate the whole database to the Azure SQL Database. I validated this by comparing the schema and sampling a few of the tables to see if they matched in the original and the migrated databases.
 
 --------------------------
 
-Data Backup and Restore - Generated a backup of the production database using SSMS. Configured a Blob Storage account on Azure and uploaded the .bak file there. Created a sandbox environment to replicate the other VM (including download of SSMS and login to Azure on the VM to access the storage account) and restored database from Blob Storage. Configured a weekly backup plan to Blob Storage account using SSMS and Azure access keys.
+## Data Backup and Restore
+Generated a backup of the production database using SSMS. Configured a Blob Storage account on Azure and uploaded the .bak file there. Created a sandbox environment to replicate the other VM (including download of SSMS and login to Azure on the VM to access the storage account) and restored database from Blob Storage. Configured a weekly backup plan to Blob Storage account using SSMS and Azure access keys.
 
 --------------------------
 
-Disaster Recovery Simulation - In my production environment I simulated data loss by corrupting the data with some SQL commands. They were as follows (with description of what the commands collectively do):
+## Disaster Recovery Simulation
+In my production environment I simulated data loss by corrupting the data with some SQL commands. They were as follows (with description of what the commands collectively do):
 
 1. Drop a table
 
@@ -63,7 +65,8 @@ After running these commands, I downloaded the weekly backup I had made in the p
 
 ----------------------------
 
-Geo-Replication and Failover - Created a geo-replica of my original database server in Central India and setup both in the same failover group. Initiated a failover to Central Indian server and a tailback to original (UK South 1).
+## Geo-Replication and Failover
+Created a geo-replica of my original database server in Central India and setup both in the same failover group. Initiated a failover to Central Indian server and a tailback to original (UK South 1).
 
 ----------------------------
 
