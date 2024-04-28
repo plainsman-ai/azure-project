@@ -1,5 +1,11 @@
 # Azure Database Migration Project
 
+A diary of my work on the Azure project for AiCore is provided below.
+
+
+
+
+
 Setting Up - Provided with login details by AiCore to log in with their subscription.
 
 ------------------------
