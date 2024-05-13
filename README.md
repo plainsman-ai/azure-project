@@ -70,6 +70,7 @@ Created a geo-replica of my original database server in Central India and setup 
 
 ----------------------------
 
-Entra ID Integration - Made a group on Entra ID and an Admin for user management and access control. Then created a new user account called db_reader111 and assigned it the db_datareader role in Azure Data Studio on the original VM. This allowed me to read the databases in the original production environment.
+## Entra ID Integration
+Made a group on Entra ID and an Admin for user management and access control. Then created a new user account called db_reader111 and assigned it the db_datareader role in Azure Data Studio on the original VM. This allowed me to read the databases in the original production environment.
 
 
